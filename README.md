@@ -6,7 +6,7 @@
 
 ## Project Overview
 
-I have been completing the 100-Days-of-Python Course (references) and this was a project on Day 23 of the course. I took upon the challenge and wrote all the code myselef without using any sort of help. The course had a bare-bones version of the game, I implemented my own animations and graphics/colours to make it slightly more visually attractive.
+I have been completing the 100-Days-of-Python Course (references-3) and this was a project on Day 23 of the course. I took upon the challenge and wrote all the code myselef without using any sort of help. The course had a bare-bones version of the game, I implemented my own animations and graphics/colours to make it slightly more visually attractive.
 
 * Optimized Random Obstactle Generation
 * Collision Detection
