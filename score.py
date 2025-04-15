@@ -9,6 +9,9 @@ class playerScore(Turtle):
         super().__init__()
         self.level = 1
         self.update_score()
+        self.hideturtle()
+        self.penup()
+
 
     def increase_score(self):
         self.clear()

@@ -1,10 +1,12 @@
 from turtle import Turtle
+import random
 PLAYER_SPAWN_Y_COORDINATE = -215
 FINISH_Y_COORDINATE = 270
 
 
 # This creates the player
 class Player(Turtle):
+    random_colors = ["red", "blue", "green", "yellow", "purple", "orange"]
     def __init__(self):
         super().__init__()
         self.shape("arrow")
@@ -12,7 +14,7 @@ class Player(Turtle):
         self.setheading(90)
         self.penup()
         self.setpos(x=0, y=-300)
-        self.color("white")
+        self.color(random.choice(self.random_colors))
         self.goto(x=0, y=PLAYER_SPAWN_Y_COORDINATE)
         self.current_player_y_position = PLAYER_SPAWN_Y_COORDINATE
 
