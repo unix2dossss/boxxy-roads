@@ -1,64 +1,56 @@
-# Boxxy Roads
+# Boxxy Roads — Neuroevolution Meets Classic Arcade
 
 <p align="center">
   <img src="readme-images/boxxy-roads-demo.png" alt="Main Menu" width="608">
 </p>
 
+**Boxxy Roads** is a modern take on the arcade-style "Crossy Road" genre — built from scratch using Python's Turtle graphics engine and evolved with NEAT (NeuroEvolution of Augmenting Topologies) to train AI agents capable of playing the game autonomously.
+
 ## Project Overview
 
-I have been completing the 100-Days-of-Python Course (references-3) and this was a project on Day 23 of the course. I took upon the challenge and wrote all the code myselef without using any sort of help. The course had a bare-bones version of the game, I implemented my own animations and graphics/colours to make it slightly more visually attractive.
+Originally inspired by Day 23 of the 100 Days of Python course, this project began as a simple user-controlled game. Over time, it was transformed into an evolving AI simulation sandbox. While the original course offered a minimal scaffold, all mechanics, graphics, animations, and NEAT-based learning components were built independently.
 
-* Optimized Random Obstactle Generation
-* Collision Detection
-* Spawning Animation
-* Level Tracking
 
-## Basic Instructions (Modes)
+* ⚡ Dynamic obstacle generation with adaptive spawning
 
-The objective of the game, is to not get hit by any obstacles and to reach the finish line. Each time you reach the end of the road, the level increases as well as the speed of the obstacles, and you respawn at the starting position.
+* 🚧 Real-time collision detection and physics-safe obstacle spacing
 
-## Download and Play
+* 🧬 AI-controlled agents powered by NEAT (genetic algorithm + neural net)
 
-1. Make sure your system has Python installed. Install Python at [python.org](https://www.python.org/downloads/). Check if you have Python installed by typing the command ```python``` and pressing enter in your command prompt or terminal. If a prompt like ```>>>``` shows up, then Python is installed.
-<br>
+* 🎯 Fitness-driven learning with smart input encoding
 
-2. You can check if Git is installed on your system by typing ``git`` in the terminial; if no errors are returned, it is installed. If git is installed you can simply copy & paste the commands below to play the game ... (if Git is not installed, **Skip to Step 3**)
+* 📈 Progressive difficulty scaling via level-up system
 
-    ```bash
-    git clone https://github.com/unix2dossss/boxxy-roads.git
-    cd boxxy-roads
-    python3 main.py
-    ```
-    - if ``python3`` returns an error, try ``python``.
-<br>
+* 💡 Minimalist aesthetic with hand-crafted visual tweaks
 
-3. If Git is not installed on your system, you can simply download and extract the zip.
+## 🧪 NEAT: Making Turtles Smarter
 
-<p align="center">
-  <img src="readme-images/downloadextractzip.png" alt= "Download/Extract" width="408">
-</p>
+| Parameter          | Value / Rationale                                                                 |
+|--------------------|------------------------------------------------------------------------------------|
+| **Inputs**         | 2D Vector — Obstacle’s relative X and Y distance from player                      |
+| **Output**         | Single value: Should the agent move forward? (`True` = advance, `False` = stay)   |
+| **Activation**     | `tanh` — Chosen for its smooth gradient and bounded output between (-1, 1)         |
+| **Population**     | 50–100 — Enough diversity for innovation without high evaluation cost             |
+| **Fitness**        | Euclidean distance from start to current Y-position                               |
+| **Max Generations**| 20 — Prevents stagnation and keeps training time reasonable                        |
 
-    cd boxxy-roads
-    python3 main.py
+### Why `tanh`?
 
-## N.E.A.T
-1. Inputs: ArrowY, Obstacle ahead (X, Y)
-2. Output: Forward?
-3. Activation Function: Tan(H) 
-4. Population: 50-100 each generation
-5. Fitness Function: Distance
-6. Max Generations: 20
+`tanh` is a classic activation function well-suited for binary decision tasks in reinforcement-style environments. It introduces non-linearity, ensures centered output (zero-mean), and naturally encourages exploration early on by producing diverse activation levels across the genome population.
+
+---
 
 ## References
 
-1. [Turtle](https://docs.python.org/3/library/turtle.html) (Graphics Library) powers the game graphics and mechanics.
-<br>
-
-2. [Time](https://docs.python.org/3/library/time.html) (Module) regulates generation intervals of obstacles.
-<br>
-
-3. [100 Days Of Code (Day 23)](https://www.udemy.com/course/100-days-of-code/)
+1. [Turtle Graphics](https://docs.python.org/3/library/turtle.html) — Used as the primary graphics and animation library to render the game environment and sprites.
+2. [NEAT-Python](https://neat-python.readthedocs.io/en/latest/) — The library used to evolve neural networks through genetic algorithms (NeuroEvolution of Augmenting Topologies).
+3. [100 Days of Code – Day 23](https://www.udemy.com/course/100-days-of-code/) — The original inspiration for the project.
 
 ## Bugs or Issues
 
 If you find a bug or have an issue with Boxxy Roads, feel free to [Submit an Issue](https://github.com/unix2dossss/boxxy-roads/issues/new)
+
+
+## License
+
+MIT License. Do whatever you want, just don’t train your AI to cross actual roads unsupervised. 🐢🚧
