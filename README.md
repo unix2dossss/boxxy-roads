@@ -41,6 +41,14 @@ The objective of the game, is to not get hit by any obstacles and to reach the f
     cd boxxy-roads
     python3 main.py
 
+## N.E.A.T
+1. Inputs: ArrowY, Obstacle ahead (X, Y)
+2. Output: Forward?
+3. Activation Function: Tan(H) 
+4. Population: 50-100 each generation
+5. Fitness Function: Distance
+6. Max Generations: 20
+
 ## References
 
 1. [Turtle](https://docs.python.org/3/library/turtle.html) (Graphics Library) powers the game graphics and mechanics.

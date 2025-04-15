@@ -78,7 +78,51 @@ class Obstacle():
                     return True
 
     def delete_past_obstacles(self):
-        for obs_objs3 in self.obstacle_instances:
-            if obs_objs3.xcor() <= -340:
-                self.obstacle_instances.remove(obs_objs3)
-                print(f"Deleted: {obs_objs3}")
+        for obs in self.obstacle_instances[:]:
+            if obs.xcor() <= -340:
+                obs.hideturtle()
+                self.obstacle_instances.remove(obs)
+
+    def spawn_new_obstacles_if_needed(self, player_y_positions):
+        if len(self.obstacle_instances) < 30:
+            max_x = max([obs.xcor() for obs in self.obstacle_instances], default=SPAWN_OBSTACLES_X_RANGE[1])
+            new_x_start = max(max_x + 100, 320)  # Always spawn off-screen
+
+            # Try generating a few obstacles safely
+            for _ in range(5):
+                y = random.randint(-screen_size, screen_size)
+
+                # Check if y is too close to any player
+                safe = all(abs(y - py) > 25 for py in player_y_positions)
+                if safe:
+                    x = random.randint(int(new_x_start), int(new_x_start + 300))
+                    obstacle_obj = Turtle()
+                    obstacle_obj.penup()
+                    obstacle_obj.shape("square")
+                    obstacle_obj.setpos(x=x, y=y)
+                    obstacle_obj.shapesize(stretch_len=2, stretch_wid=1)
+                    obstacle_color = random.choice(COLORS2)
+                    obstacle_obj.color(obstacle_color)
+                    self.obstacle_instances.append(obstacle_obj)
+
+
+    def get_nearest_obstacle_distance(self, player):
+        min_dist = float("inf")
+        nearest_x_diff = 0
+        nearest_y_diff = 0
+
+        for obs in self.obstacle_instances:
+            x_diff = obs.xcor() - player.xcor()
+            y_diff = obs.ycor() - player.ycor()
+
+            # Only consider obstacles in front of player (x > 0)
+            if x_diff >= 0:
+                distance = (x_diff ** 2 + y_diff ** 2) ** 0.5  # Euclidean distance
+                if distance < min_dist:
+                    min_dist = distance
+                    nearest_x_diff = x_diff
+                    nearest_y_diff = y_diff
+        
+        # print(nearest_x_diff, nearest_y_diff)
+
+        return nearest_x_diff, nearest_y_diff
