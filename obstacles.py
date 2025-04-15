@@ -8,7 +8,7 @@ COLORS2 = [(249, 155, 78), (48, 59, 147), (237, 77, 135), (250, 227, 190), (77, 
 n_blocks = 25
 screen_size = 225
 avg_block_dist = round(screen_size / n_blocks)
-SPAWN_OBSTACLES_X_RANGE = [-280, 280]
+SPAWN_OBSTACLES_X_RANGE = [-280, 300]
 SPAWN_HIDDEN_OBSTACLES_RANGE = [330, 860]
 
 
@@ -73,8 +73,8 @@ class Obstacle():
         for obs_objs2 in self.obstacle_instances:
             if obs_objs2.xcor() <= 35 and obs_objs2.xcor() >= -35:
                 if obs_objs2.ycor() < player_y_pos + 23 and obs_objs2.ycor() > player_y_pos - 16:
-                    print(f"x(obstacle): {obs_objs2.xcor()}")
-                    print(f"y(obstacle): {obs_objs2.ycor()}")
+                    # print(f"x(obstacle): {obs_objs2.xcor()}")
+                    # print(f"y(obstacle): {obs_objs2.ycor()}")
                     return True
 
     def delete_past_obstacles(self):

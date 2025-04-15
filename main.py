@@ -34,10 +34,11 @@ def setup_game():
     # window.listen()
     # window.onkey(user_player.move_up, "Up")
 
-setup_game()
+# setup_game()
 
 
 def main(genomes, config):
+    setup_game()
     nets = []
     ge = []
     user_players = []
@@ -67,10 +68,11 @@ def main(genomes, config):
                 ge[x].fitness += 5
 
                 obstacle.spawn_next_obstacle_set()
-                obstacle.increase_speed()
+                # obstacle.increase_speed()
             
-            if user_player.ycor() <= -200:
-                ge[x].fitness -= 1
+            if user_player.ycor() <= -275:
+                # print("player stuck at spawn", user_player.ycor())
+                ge[x].fitness -= 10
 
         # print(user_player.current_player_y_position)
 
@@ -82,15 +84,15 @@ def main(genomes, config):
                 nearest_y_diff
             ])
 
-            if output[0] > 0.5:
-                print(output[0], "output > 0.5")
+            if output[0] > -0.5:
+                # print(output[0], "output > 0.5")
                 user_player.move_up()
 
             if obstacle.user_hit_obstacle(user_player.current_player_y_position):
-                print(f"HIT: y(player): {user_player.current_player_y_position}")
+                # print(f"HIT: y(player): {user_player.current_player_y_position}")
 
                 # remove 1 from fitness score if collision
-                ge[x].fitness -= 1
+                ge[x].fitness -= 0.5
                 players_to_remove.append(x)
 
                 # window.clearscreen()
@@ -100,9 +102,11 @@ def main(genomes, config):
 
 
         for i in reversed(players_to_remove):
-            print(f"Removing player {i}")
-            user_players[i].reset()
-            user_players.pop(i)
+            # print(f"Removing player {i}")
+            user_players[i].hideturtle()
+            user_players[i].clear()
+            del user_players[i]
+            # user_players.pop(i)
             nets.pop(i)
             ge.pop(i)
 
@@ -112,11 +116,11 @@ def main(genomes, config):
 
         if len(user_players) == 0:
             print("All players are dead")
-            game_is_on = False
             window.clearscreen()
-            setup_game()
+            game_is_on = False
 
-    window.exitonclick()
+
+    # window.exitonclick()
 
 # main()
 
