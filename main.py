@@ -60,23 +60,26 @@ def main(genomes, config):
         players_to_remove = []
         for x, user_player in enumerate(user_players):
             if user_player.ycor() >= 270:
+                any_player_finished = True
                 # print("Finished")
-                user_player.take_player_to_start()
-                scoreboard.increase_score()
+                # user_player.take_player_to_start()
+                players_to_remove.append(x)
+                # scoreboard.increase_score()
                 
                 # increase fitness score by 5 if player reaches finish line
                 ge[x].fitness += 5
 
-                obstacle.spawn_next_obstacle_set()
+                # obstacle.spawn_next_obstacle_set()
                 # obstacle.increase_speed()
             
-            if user_player.ycor() <= -275:
-                # print("player stuck at spawn", user_player.ycor())
-                ge[x].fitness -= 10
+            # if user_player.ycor() <= -275:
+            #     # print("player stuck at spawn", user_player.ycor())
+            #     ge[x].fitness -= 10
 
         # print(user_player.current_player_y_position)
 
             nearest_x_diff, nearest_y_diff = obstacle.get_nearest_obstacle_distance(user_player)
+            # print(f"nearest_x_diff: {nearest_x_diff} nearest_y_diff: {nearest_y_diff}")
 
             output = nets[x].activate([
                 user_player.ycor(),
@@ -87,6 +90,11 @@ def main(genomes, config):
             if output[0] > -0.5:
                 # print(output[0], "output > 0.5")
                 user_player.move_up()
+                ge[x].fitness += 1
+            else:
+                ge[x].fitness -= 0.1
+
+
 
             if obstacle.user_hit_obstacle(user_player.current_player_y_position):
                 # print(f"HIT: y(player): {user_player.current_player_y_position}")
@@ -98,7 +106,7 @@ def main(genomes, config):
                 # window.clearscreen()
                 # setup_game()
             
-            ge[x].fitness += 0.1
+            # ge[x].fitness -= 0.1
 
 
         for i in reversed(players_to_remove):
@@ -136,7 +144,7 @@ def run(config_path):
     stats = neat.StatisticsReporter()
     p.add_reporter(stats)
 
-    winner = p.run(main, 30)
+    winner = p.run(main, 150)
 
 if __name__ == "__main__":
     local_dir = os.path.dirname(__file__)

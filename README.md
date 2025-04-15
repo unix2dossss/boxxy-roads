@@ -1,7 +1,7 @@
 # Boxxy Roads — Neuroevolution Meets Classic Arcade
 
 <p align="center">
-  <img src="readme-images/boxxy-roads-demo.png" alt="Main Menu" width="608">
+  <img src="readme-images/preview.png" alt="Main Menu">
 </p>
 
 **Boxxy Roads** is a modern take on the arcade-style "Crossy Road" genre — built from scratch using Python's Turtle graphics engine and evolved with NEAT (NeuroEvolution of Augmenting Topologies) to train AI agents capable of playing the game autonomously.

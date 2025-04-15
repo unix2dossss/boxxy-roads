@@ -89,7 +89,7 @@ class Obstacle():
             new_x_start = max(max_x + 100, 320)  # Always spawn off-screen
 
             # Try generating a few obstacles safely
-            for _ in range(5):
+            for _ in range(15):
                 y = random.randint(-screen_size, screen_size)
 
                 # Check if y is too close to any player
@@ -116,12 +116,14 @@ class Obstacle():
             y_diff = obs.ycor() - player.ycor()
 
             # Only consider obstacles in front of player (x > 0)
-            if x_diff >= 0:
+            if -100 <= x_diff <= 100:
                 distance = (x_diff ** 2 + y_diff ** 2) ** 0.5  # Euclidean distance
                 if distance < min_dist:
                     min_dist = distance
                     nearest_x_diff = x_diff
                     nearest_y_diff = y_diff
+                    obs.color("white")
+
         
         # print(nearest_x_diff, nearest_y_diff)
 
